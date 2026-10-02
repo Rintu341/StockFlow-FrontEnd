@@ -1,0 +1,137 @@
+# ============================================
+# Gradle / Build output
+# ============================================
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/**/build/
+
+# Kotlin
+.kotlin/
+*.kotlin_module
+kotlin-js-store/
+
+# ============================================
+# Local configuration (machine-specific / secrets)
+# ============================================
+local.properties
+*.jks
+*.keystore
+keystore.properties
+google-services.json
+GoogleService-Info.plist
+.env
+.env.*
+secrets.properties
+
+# ============================================
+# Android
+# ============================================
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+captures/
+.externalNativeBuild/
+.cxx/
+proguard/
+lint-report*.html
+lint-results*.xml
+
+# ============================================
+# Android Studio / IntelliJ IDEA
+# ============================================
+*.iml
+*.ipr
+*.iws
+.idea/*
+!.idea/codeStyles/
+!.idea/runConfigurations/
+!.idea/icon.svg
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/deploymentTargetDropDown.xml
+.idea/deploymentTargetSelector.xml
+.idea/misc.xml
+.idea/gradle.xml
+.idea/compiler.xml
+.idea/vcs.xml
+.idea/jarRepositories.xml
+.idea/migrations.xml
+.idea/AndroidProjectSystem.xml
+.idea/studiobot.xml
+
+# ============================================
+# iOS / Xcode
+# ============================================
+iosApp/build/
+iosApp/Pods/
+iosApp/Podfile.lock
+iosApp/DerivedData/
+DerivedData/
+Pods/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+iosApp/iosApp.xcodeproj/project.xcworkspace/xcuserdata/
+iosApp/Configuration/Config.xcconfig.local
+
+# ============================================
+# Desktop (JVM) packaging output
+# ============================================
+composeApp/build/compose/
+**/build/compose/binaries/
+*.dmg
+*.msi
+*.exe
+*.deb
+*.rpm
+*.pkg
+hs_err_pid*
+replay_pid*
+
+# ============================================
+# Web targets (if you add wasmJs / js later)
+# ============================================
+node_modules/
+.yarn/
+yarn-error.log
+npm-debug.log
+
+# ============================================
+# OS files
+# ============================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*~
+
+# ============================================
+# Logs and temp files
+# ============================================
+*.log
+*.tmp
+*.temp
+*.swp
+*.bak
+.fleet/
+.vscode/

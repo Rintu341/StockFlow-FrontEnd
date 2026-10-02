@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#009689" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- StockFlow app icon -->
+  <rect x="40" y="40" width="432" height="432" rx="122" fill="#009689" filter="url(#shadow)"/>
+
+  <!-- White inventory/window mark -->
+  <rect x="171" y="166" width="170" height="43" rx="10" fill="#FFFFFF"/>
+  <rect x="171" y="239" width="67" height="91" rx="10" fill="#FFFFFF"/>
+  <rect x="259" y="239" width="70" height="91" rx="10" fill="#FFFFFF"/>
+</svg>
