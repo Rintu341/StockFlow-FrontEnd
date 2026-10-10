@@ -29,8 +29,14 @@ class LoginViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             _state.update { it.copy(isLoading = true, error = null) }
             val result = loginUseCase(state.value.email, state.value.password)
-            result.onSuccess {
-                _state.update { it.copy(isLoading = false, isSuccess = true) }
+            result.onSuccess { user ->
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        isSuccess = true,
+                        mustChangePassword = user.mustChangePassword
+                    )
+                }
             }.onFailure { e ->
                 _state.update { it.copy(isLoading = false, error = e.message ?: "Login failed") }
             }
@@ -43,5 +49,6 @@ data class LoginState(
     val password: String = "",
     val isLoading: Boolean = false,
     val isSuccess: Boolean = false,
+    val mustChangePassword: Boolean = false,
     val error: String? = null
 )

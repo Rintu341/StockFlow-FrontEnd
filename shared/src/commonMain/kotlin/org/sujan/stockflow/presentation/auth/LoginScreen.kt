@@ -51,8 +51,8 @@ import stockflow.shared.generated.resources.Res
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel(),
-    onLoginSuccess: () -> Unit = {}
-) {
+    onLoginSuccess: (mustChangePassword: Boolean) -> Unit = {}
+)  {
     val state by viewModel.state.collectAsState()
     var iconBytes by remember { mutableStateOf<ByteArray?>(null) }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -62,7 +62,7 @@ fun LoginScreen(
     }
     LaunchedEffect(state.isSuccess) {
         if (state.isSuccess) {
-            onLoginSuccess()
+            onLoginSuccess(state.mustChangePassword)
         }
     }
 
@@ -135,7 +135,7 @@ fun LoginScreen(
 
                     StockFlowTextField(
                         value = state.email,
-                        onValueChange = viewModel::onEmailChange,
+                        onValueChange = {viewModel.onEmailChange(it)} ,
                         label = "Email address",
                         placeholder = "you@company.com",
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
@@ -176,7 +176,7 @@ fun LoginScreen(
 
                     StockFlowButton(
                         text = if (state.isLoading) "" else "Log in",
-                        onClick = viewModel::login,
+                        onClick = { viewModel.login() },
                         enabled = !state.isLoading
                     )
 

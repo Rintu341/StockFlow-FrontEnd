@@ -12,6 +12,7 @@ kotlin {
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+            optIn.add("kotlin.time.ExperimentalTime")
         }
     }
 
@@ -65,6 +66,8 @@ kotlin {
 
             // Serialization
             implementation(libs.kotlinx.serialization.json)
+
+            implementation(libs.kotlinx.datetime)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

@@ -1,10 +1,14 @@
 package org.sujan.stockflow.presentation.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +33,7 @@ fun MainScreen(
     onSignOut: () -> Unit = {}
 ) {
     val navController = rememberNavController()
-    val viewModel: DashboardViewModel = koinViewModel()
+    val viewModel: MainViewModel = koinViewModel()      // was DashboardViewModel
     val state by viewModel.state.collectAsState()
 
     val allItems = listOf(
@@ -42,9 +46,25 @@ fun MainScreen(
     )
 
     val role = state.user?.role
-    val filteredItems = allItems.filter { item ->
-        role == null || item.roles.contains(role)
+
+    LaunchedEffect(state.isSignedOut) {
+        if (state.isSignedOut) onSignOut()
     }
+
+    if (role == null) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+        return
+    }
+    fun navigateToTab(route: String) {
+        navController.navigate(route) {
+            popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+            launchSingleTop = true
+            restoreState = true
+        }
+    }
+    val filteredItems = allItems.filter { it.roles.contains(role) }
 
     Scaffold(
         bottomBar = {
@@ -93,7 +113,10 @@ fun MainScreen(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(BottomNavItem.Dashboard.route) {
-                DashboardScreen(onSignedOut = onSignOut)
+                DashboardScreen(
+                    onViewAllOrders = { navigateToTab(BottomNavItem.Orders.route) },
+                    onSignedOut = onSignOut
+                )
             }
             composable(BottomNavItem.Inventory.route) {
                 InventoryScreen(onAddProduct = { navController.navigate(Screen.AddProduct.route) })
@@ -114,7 +137,11 @@ fun MainScreen(
                 )
             }
             composable(Screen.ChangePassword.route) {
-                ChangePasswordScreen(onBack = { navController.popBackStack() })
+                ChangePasswordScreen(
+                    forced = false,
+                    onDone = { navController.popBackStack() },
+                    onBack = { navController.popBackStack() }
+                )
             }
             composable(Screen.AddProduct.route) {
                 AddProductScreen(onBack = { navController.popBackStack() })
@@ -124,4 +151,8 @@ fun MainScreen(
             }
         }
     }
+
+
 }
+
+

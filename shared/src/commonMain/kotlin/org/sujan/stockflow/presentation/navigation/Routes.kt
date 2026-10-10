@@ -16,6 +16,7 @@ sealed class Screen(val route: String) {
     object ChangePassword : Screen("change_password")
     object AddProduct : Screen("add_product")
     object CreateOrder : Screen("create_order")
+    object ForceChangePassword : Screen("force_change_password")
 }
 
 sealed class BottomNavItem(

@@ -5,5 +5,7 @@ data class User(
     val email: String,
     val username: String,
     val role: Role,
-    val tenantId: String
+    val tenantId: String,
+    val tenantName: String,
+    val mustChangePassword: Boolean
 )
